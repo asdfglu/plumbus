@@ -1,0 +1,120 @@
+package com.aperture.closery.persistence;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import com.aperture.closery.model.User;
+import com.mysql.jdbc.PreparedStatement;
+
+public class UserDAO {
+private ConexaoMysql conexao;
+	
+	public UserDAO() {
+		super();
+		this.conexao = new ConexaoMysql("localhost", "3306", "root", "root", "closery");
+	}
+
+	public User insert(User user) {
+		this.conexao.abrirConexao();
+		String sqlInsert = "INSERT INTO user VALUES(null, ?,?,?,?,?,?,?,?)";
+		try {
+			PreparedStatement statement = (PreparedStatement) this.conexao.getConexao().prepareStatement(sqlInsert, PreparedStatement.RETURN_GENERATED_KEYS);
+			statement.setString(1, user.getUsername());
+			statement.setString(2, user.getFullname());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getDescription());
+			statement.setString(5, user.getInstagram());
+			statement.setString(6, user.getTwitter());
+			statement.setString(7, user.getSnapchat());
+			statement.setString(8, user.getWhatsapp());
+			statement.executeUpdate();
+			ResultSet rs = statement.getGeneratedKeys();
+			if(rs.next()) {
+				long id = rs.getLong(1);
+				user.setIdUser(id);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.conexao.fecharConexao();
+		}
+		return user;
+	}
+	
+	public boolean update(User user) {
+		this.conexao.abrirConexao();
+		String sqlUpdate = "UPDATE  SET username=?, fullname=?, email=?, description=?, instagram=?,twitter=?,snapchat=?,whatsapp=? WHERE id_user=?";
+		try {
+			PreparedStatement statement = (PreparedStatement) this.conexao.getConexao().prepareStatement(sqlUpdate);
+			
+			statement.setString(1, user.getUsername());
+			statement.setString(2, user.getFullname());
+			statement.setString(3, user.getEmail());
+			statement.setString(4, user.getDescription());
+			statement.setString(5, user.getInstagram());
+			statement.setString(6, user.getTwitter());
+			statement.setString(7, user.getSnapchat());
+			statement.setString(8, user.getWhatsapp());
+			
+			int linhasAfetadas = statement.executeUpdate();
+			if (linhasAfetadas > 0) {
+				return true;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.conexao.fecharConexao();
+		}
+		return false;
+		
+	}
+			
+	public boolean excluir(Long idUser) {
+		this.conexao.abrirConexao();
+		String sqlExcluir = "DELETE * FROM post WHERE id_post=?";
+
+		try {
+			PreparedStatement statement = (PreparedStatement) this.conexao.getConexao().prepareStatement(sqlExcluir);
+			statement.setLong(1, idUser);
+			int linhasAfetadas = statement.executeUpdate();
+			if(linhasAfetadas>0) {
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			this.conexao.fecharConexao();
+		}
+		return false;
+	}
+	
+	public User buscarPorId(long idUser) {
+	this.conexao.abrirConexao();
+	String sqlBuscarPorId = "SELECT * FROM post WHERE id_post=?";
+	User user = null;
+	try {
+		PreparedStatement statement = (PreparedStatement) this.conexao.getConexao().prepareStatement(sqlBuscarPorId);
+		statement.setLong(1, idUser);
+		ResultSet rs = statement.executeQuery();
+		if(rs.next()) {
+			user = new User();
+			user.setIdUser(rs.getLong("id_user"));
+			user.setUsername(rs.getString("username"));
+			user.setFullname(rs.getString("fullname"));
+			user.setEmail(rs.getString("email"));
+			user.setDescription(rs.getString("decription"));
+			user.setInstagram(rs.getString("instagram"));
+			user.setTwitter(rs.getString("twitter"));
+			user.setSnapchat(rs.getString("snapchat"));
+			user.setWhatsapp(rs.getString("whatsapp"));
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		this.conexao.fecharConexao();
+	}		
+	return user;
+	}
+	
+	}
+
