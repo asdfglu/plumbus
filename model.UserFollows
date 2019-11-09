@@ -1,6 +1,6 @@
 package com.aperture.closery.model;
 import com.aperture.closery.model.User;
-public class UserContact {
+public class UserFollows {
 	
 	private User user;
 	private User follows;
@@ -18,12 +18,12 @@ public class UserContact {
 	public void setContact(User contact) {
 		this.follows = contact;
 	}
-	public UserContact(User user, User contact) {
+	public UserFollows(User user, User contact) {
 		super();
 		this.user = user;
 		this.follows = contact;
 	}
-	public UserContact() {
+	public UserFollows() {
 		super();
 	}
 	
