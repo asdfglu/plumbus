@@ -1,0 +1,30 @@
+package com.aperture.closery.model;
+import com.aperture.closery.model.User;
+public class UserContact {
+	
+	private User user;
+	private User follows;
+	
+	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public User getContact() {
+		return follows;
+	}
+	public void setContact(User contact) {
+		this.follows = contact;
+	}
+	public UserContact(User user, User contact) {
+		super();
+		this.user = user;
+		this.follows = contact;
+	}
+	public UserContact() {
+		super();
+	}
+	
+}
