@@ -1,0 +1,29 @@
+package com.aperture.closery.model;
+
+public class ContactUser {
+	private User user;
+	private User Follower;
+	public ContactUser() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
+	public User getFollower() {
+		return Follower;
+	}
+	public void setFollower(User follower) {
+		Follower = follower;
+	}
+	public ContactUser(User user, User follower) {
+		super();
+		this.user = user;
+		Follower = follower;
+	}
+	
+	
+}
