@@ -1,0 +1,46 @@
+CREATE DATABASE closety;
+
+USE closety;
+
+CREATE TABLE user(
+id_user long unique not null primary key,
+username varchar(12) not null,
+fullname varchar(32) not null,
+email varchar(80) not null,
+description varchar(180),
+instagram varchar(16),
+twitter varchar(16),
+snapchat varchar(16),
+whatsapp varchar(16)
+);
+
+CREATE TABLE song(
+id_song long unique not null primary key,
+name varchar(32) not null,
+album varchar(32) not null,
+artist varchar(32) not null
+);
+
+CREATE TABLE userFollows(
+id_user long unique not null primary key,
+id_followed long unique not null primary key,
+foreign key (id_user) references user,
+foreign key (id_follow) references user
+);
+
+CREATE TABLE userFollower(
+id_user long unique not null primary key,
+id_follower long unique not null primary key,
+foreign key (id_user) references user,
+foreign key (id_follower) references user
+); 
+
+CREATE TABLE userSongs(
+id_song long unique not null primary key,
+id_user long unique not null primary key,
+foreign key (id_user) references user,
+foreign key (id_song) references song
+);
+
+
+
