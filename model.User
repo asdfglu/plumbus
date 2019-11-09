@@ -10,15 +10,15 @@ public class User {
 	private String twitter;
 	private String snapchat;
 	private String whatsapp;
-	private ArrayList<UserContact> follows; 
-	private ArrayList<ContactUser> follower;
+	private ArrayList<UserFollows> follows; 
+	private ArrayList<UserFollowed> follower;
 	private ArrayList<UserSongs> listSongs;
 		
 	
 
 	public User(Long idUser, String username, String fullname, String email, String description, String instagram,
-			String twitter, String snapchat, String whatsapp, ArrayList<UserContact> follows,
-			ArrayList<ContactUser> follower, ArrayList<UserSongs> listSongs) {
+			String twitter, String snapchat, String whatsapp, ArrayList<UserFollows> follows,
+			ArrayList<UserFollowed> follower, ArrayList<UserSongs> listSongs) {
 		super();
 		this.idUser = idUser;
 		this.username = username;
@@ -111,19 +111,19 @@ public class User {
 		this.whatsapp = whatsapp;
 	}
 
-	public ArrayList<UserContact> getFollows() {
+	public ArrayList<UserFollows> getFollows() {
 		return follows;
 	}
 
-	public void setFollows(ArrayList<UserContact> follows) {
+	public void setFollows(ArrayList<UserFollows> follows) {
 		this.follows = follows;
 	}
 
-	public ArrayList<ContactUser> getFollower() {
+	public ArrayList<UserFollowed> getFollower() {
 		return follower;
 	}
 
-	public void setFollower(ArrayList<ContactUser> follower) {
+	public void setFollower(ArrayList<UserFollowed> follower) {
 		this.follower = follower;
 	}
 
