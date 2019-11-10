@@ -22,15 +22,17 @@ artist varchar(32) not null
 );
 
 CREATE TABLE userFollows(
-id_user long unique not null primary key,
-id_followed long unique not null primary key,
+id_userFollows long unique not null,
+id_user long unique not null,
+id_followed long unique not null,
 foreign key (id_user) references user,
 foreign key (id_follow) references user
 );
 
 CREATE TABLE userFollower(
-id_user long unique not null primary key,
-id_follower long unique not null primary key,
+id_userFollower long unique not null primary key,
+id_user long unique not null,
+id_follower long unique not null,
 foreign key (id_user) references user,
 foreign key (id_follower) references user
 ); 
@@ -41,6 +43,7 @@ id_user long unique not null primary key,
 foreign key (id_user) references user,
 foreign key (id_song) references song
 );
+
 
 
 
