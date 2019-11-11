@@ -26,7 +26,7 @@ id_userFollows long unique not null,
 id_user long unique not null,
 id_followed long unique not null,
 foreign key (id_user) references user,
-foreign key (id_follow) references user
+foreign key (id_followed) references user
 );
 
 CREATE TABLE userFollower(
@@ -38,8 +38,9 @@ foreign key (id_follower) references user
 ); 
 
 CREATE TABLE userSongs(
-id_song long unique not null primary key,
-id_user long unique not null primary key,
+id_userSong long unique not null primary key,
+id_song long unique not null,
+id_user long unique not null,
 foreign key (id_user) references user,
 foreign key (id_song) references song
 );
